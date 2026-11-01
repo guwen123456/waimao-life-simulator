@@ -1,0 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Noto+Serif+SC:wght@600;700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-harbor: #101614;
+  --color-dock: #1a2420;
+  --color-ink: #16130f;
+  --color-foam: #e7f0ea;
+  --color-paper: #f4efe4;
+  --color-paper-ink: #1c1915;
+  --color-brass: #e0b15a;
+  --color-jade: #1f9d72;
+  --color-coral: #e15a48;
+  --color-mist: #93a39a;
+  --color-line: #2c3b34;
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-serif: "Noto Serif SC", "Songti SC", serif;
+  --radius: 1rem;
+}
+
+@layer base {
+  html,
+  body {
+    height: 100%;
+    background: var(--color-harbor);
+    color: var(--color-foam);
+    font-family: var(--font-sans);
+  }
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  input:focus-visible {
+    outline: 2px solid var(--color-brass);
+    outline-offset: 2px;
+  }
+}
+
+.num {
+  font-variant-numeric: tabular-nums;
+}
+
+.harbor-bg {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--color-harbor) 20%, transparent), var(--color-harbor) 88%),
+    url("/art/harbor.jpg") center / cover no-repeat;
+}
+
+.title-scrim {
+  background:
+    linear-gradient(180deg, color-mix(in oklab, var(--color-harbor) 18%, transparent) 0%, var(--color-harbor) 76%),
+    linear-gradient(90deg, color-mix(in oklab, var(--color-harbor) 86%, transparent), transparent 70%),
+    url("/art/harbor.jpg") center / cover no-repeat;
+}
+
+.ticker-track {
+  animation: ticker 32s linear infinite;
+}
+
+.stamp {
+  animation: stamp-in 0.38s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+
+.rise {
+  animation: rise 0.35s ease both;
+}
+
+.shake {
+  animation: shake 0.42s linear;
+}
+
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes stamp-in {
+  0% { transform: rotate(-18deg) scale(1.4); opacity: 0; }
+  100% { transform: rotate(-8deg) scale(1); opacity: 1; }
+}
+@keyframes rise {
+  from { transform: translateY(10px); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(5px); }
+  60% { transform: translateX(-3px); }
+  80% { transform: translateX(2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track,
+  .stamp,
+  .rise,
+  .shake {
+    animation: none;
+  }
+}
